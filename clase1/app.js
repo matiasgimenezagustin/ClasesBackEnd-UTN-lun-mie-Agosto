@@ -185,3 +185,79 @@ nombrarParticipantes() por cada participante debera decir el nombre y apellido d
 pagarSueldos() por cada participante activara el metodo pagar sueldo
 
   */
+ 
+class Proyecto {
+    constructor(titulo, precio, categoria, duracionEstimada) {
+        this.titulo = titulo;
+        this.precio = precio;
+        this.categoria = categoria;
+        this.duracionEstimada = duracionEstimada;
+        this.participantes = [];
+
+    }
+
+    agregarParticipante(participante) {
+        this.participantes.push(participante);
+    }
+
+    eliminarParticipante(nombre) {
+        this.participantes = this.participantes.filter(participante => participante.nombre !== nombre);
+    }
+
+    reestimarElProyecto(nuevaEstimacion) {
+        this.duracionEstimada = nuevaEstimacion
+    }
+
+    nombrarParticipantes() {
+        this.participantes.forEach(participante => {
+            console.log(participante.nombre, participante.apellido)
+        });
+    }
+
+    pagar(){
+        this.participantes.forEach(participante => { 
+            participante.pagarSueldo()
+        })
+    }
+}
+
+class Participante{
+    constructor(nombre, apellido, remuneracion){
+        this.nombre = nombre
+        this.apellido = apellido
+        this.dinero = 0
+        this.amigos = []
+        this.remuneracion = remuneracion        
+    }
+
+    pagarSueldo() {
+        this.dinero += this.remuneracion
+        console.log(`${this.nombre} ha recibido: ${this.remuneracion} y ahora tiene: ${this.dinero}`)
+    }
+}
+
+
+const mirko = new Participante('Mirko', 'Ferraro', 230000)
+
+const anibal = new Participante('Anibal', 'Fidel', 330000)
+
+const pepe = new Participante('Pepe', 'Suarez', 2000)
+
+const proyectoHospital = new Proyecto('Hospital Web', 3000000, 'Salud', 200)
+
+proyectoHospital.agregarParticipante(mirko)
+proyectoHospital.agregarParticipante(anibal)
+
+proyectoHospital.pagar()
+proyectoHospital.pagar()
+
+/* 
+const x = new Proyecto()
+
+let nombrePersona = 'pepe'
+let edadPersona = 90
+
+const persona ={
+    nombrePersona : 'pepe',
+    edadPersona: 90
+} */

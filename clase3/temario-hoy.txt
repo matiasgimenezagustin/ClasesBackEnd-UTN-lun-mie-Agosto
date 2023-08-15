@@ -1,0 +1,22 @@
+Ver Funciones
+Ver arrays y array de objetos con interface
+
+
+interface Persona {
+    nombre: string,
+    apellido: string
+}
+
+Creamos el array de objetos a partir de la interface 
+
+const personas : Persona[] = [
+    {
+        nombre: 'pepe',
+        apellido: 'lucas'
+    },
+    {
+        nombre: 'pepe',
+        apellido: 'lucas'
+    },
+]
+
