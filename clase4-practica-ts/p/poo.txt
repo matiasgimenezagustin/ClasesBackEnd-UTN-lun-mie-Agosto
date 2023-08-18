@@ -1,0 +1,87 @@
+
+class Product{
+    title: string
+    price: number
+    stock: number
+    id: number
+    quantity: number
+    constructor(title: string, price: number, stock: number, id: number){
+        this.title = title
+        this.price = price
+        this.stock = stock
+        this.id = id
+        this.quantity =  0
+    }
+}
+
+class Cart {
+    cart: Product[]
+    id: number
+    constructor(id: number){
+        this.cart = []
+        this.id = id
+    }
+    isInCart(id: number):boolean{
+        return this.cart.some((product:Product) : boolean => product.id === id)
+    }
+    addProduct(product: Product) : void{
+        this.cart.push(product)
+    }
+}
+
+class CartManager{
+    carts: Cart[]
+    id: number
+    constructor(){
+        this.carts = []
+        this.id = 0
+    }
+    createCart():void{
+        this.carts.push(new Cart(this.id++))
+    }
+
+    getCartById(cid: number) : Cart | null{
+        const cartFound : Cart | undefined = this.carts.find((cart : Cart) : boolean => cart.id === cid)
+        return cartFound || null
+    }
+
+    addProductCart(cid: number,product: Product, quantity: number): void {
+        /* El carrito al que queremos agregar el producto existe */
+        if(this.carts.some((cart: Cart) : boolean => cart.id === cid)){
+            this.carts = this.carts.map((cart: Cart) : Cart =>{
+                if(cart.id === cid){
+                    if(cart.isInCart(product.id)){
+                        /* Logica para aumentar la cantidad del producto */
+                        cart.cart = cart.cart.map((currentProduct: Product) : Product => {
+                            if(currentProduct.id === product.id){
+                                currentProduct.quantity += quantity
+                            }
+                            return currentProduct
+                        })
+                    }
+                    else{
+                        /* Logica para agregar el producto al array cart */
+                        product.quantity = quantity
+                        cart.addProduct(product)
+                    }
+                }
+                return cart
+            })
+        }
+    }
+}
+
+const managerCarts = new CartManager()
+
+managerCarts.createCart()
+managerCarts.createCart()
+
+
+
+console.log(managerCarts.getCartById(9))
+
+managerCarts.addProductCart(0, new Product('lata', 500, 4, 1), 3)
+managerCarts.addProductCart(0, new Product('lata', 500, 4, 1), 3)
+
+
+console.log(managerCarts.carts[0].cart)
