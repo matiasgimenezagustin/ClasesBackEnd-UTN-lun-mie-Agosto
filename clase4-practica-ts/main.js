@@ -113,6 +113,23 @@ class CartManager {
             }
         }
     }
+    /* getTotalCart(cid:number): number{
+        const cartFound : null | Cart = this.getCartById(cid)
+        let precioTotal : number = 0
+        if(cartFound){
+            cartFound.cart.forEach((product: Product) : void => {precioTotal += product.price * product.quantity})
+        }
+
+        return precioTotal
+    } */
+    getTotalCart(cid) {
+        const cartActual = this.getCartById(cid);
+        let total = 0;
+        if (cartActual) {
+            total = cartActual.cart.reduce((acc, product) => acc + product.quantity * product.price, total);
+        }
+        return total;
+    }
 }
 const managerCarts = new CartManager();
 managerCarts.createCart();
@@ -124,6 +141,7 @@ managerCarts.addProductCart(0, new Product('Bici', 500, 4, 2), 3);
 managerCarts.addProductCart(0, new Product('lata', 500, 4, 3), 3);
 managerCarts.modificar(0, new Product('auto', 500, 4, 4), 2);
 managerCarts.modificar(0, new Product('auto', 500, 4, 4), 2);
+console.log(managerCarts.getTotalCart(0));
 console.log(managerCarts.carts[0].cart);
 /*
 addProductCart(cid: number, product: Product, quantity: number): void {

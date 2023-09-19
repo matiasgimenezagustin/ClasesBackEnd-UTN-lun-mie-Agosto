@@ -7,12 +7,13 @@ title: string
 price: number
 stock: number
 id: string
-
+quantity: number
 
 Generar la class Cart 
 Propiedades:
 cart: Product[]
 id: number
+getCartById() recibe un id y devuelve el carrito buscado o null en caso de no existir 
 
 Generar una clase llamada CartManager:
 Propiedades: 
@@ -129,6 +130,26 @@ class CartManager{
             }
         }
     }
+    /* getTotalCart(cid:number): number{
+        const cartFound : null | Cart = this.getCartById(cid)
+        let precioTotal : number = 0
+        if(cartFound){
+            cartFound.cart.forEach((product: Product) : void => {precioTotal += product.price * product.quantity})
+        }
+
+        return precioTotal
+    } */
+
+    getTotalCart(cid: number): number {
+        const cartActual: Cart | null = this.getCartById(cid)
+        let total : number = 0
+        if(cartActual){
+            total = cartActual.cart.reduce((acc, product: Product) => acc + product.quantity * product.price, total )
+        }
+        return total
+    }
+
+
 }
 
 const managerCarts = new CartManager()
@@ -146,6 +167,7 @@ managerCarts.addProductCart(0, new Product('Bici', 500, 4, 2), 3)
 managerCarts.addProductCart(0, new Product('lata', 500, 4, 3), 3)
 managerCarts.modificar(0,new Product('auto', 500, 4, 4), 2 )
 managerCarts.modificar(0,new Product('auto', 500, 4, 4), 2 )
+console.log(managerCarts.getTotalCart(0))
 console.log(managerCarts.carts[0].cart)
 
 
