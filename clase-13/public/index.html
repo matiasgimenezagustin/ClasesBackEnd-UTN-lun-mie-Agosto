@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hola</h1>
+    <div id="response"></div>
+    <form id="formulario">
+        <label>Mensaje: </label>
+        <br>
+        <input placeholder="ingrese un mensaje" name="mensaje"/>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const direccion = 'http://localhost:8080/'
+        const formularioHTML = document.getElementById('formulario')
+        formularioHTML.addEventListener('submit', (e)=>{
+            e.preventDefault()
+
+            const data = {mensaje: formularioHTML.mensaje.value}
+            fetch(direccion, {
+                method: 'POST', 
+                body: new URLSearchParams(data).toString(), 
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+        })
+
+        const responseHTML = document.getElementById('response')
+        const callApi = async () =>{
+            let response = await fetch('http://localhost:8080/', {method: 'GET'}).then(res => res.json())
+            console.log(response)
+            responseHTML.innerHTML = response.mensaje
+        }
+
+
+        callApi()
+    </script>
+</body>
+</html>
+
