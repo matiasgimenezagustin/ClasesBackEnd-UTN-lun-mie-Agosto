@@ -9,26 +9,31 @@
     <h1>hola</h1>
     <div id="response"></div>
     <form id="formulario">
-        <label>Mensaje: </label>
+        <label>Nombre de usuario: </label>
         <br>
-        <input placeholder="ingrese un mensaje" name="mensaje"/>
+        <input placeholder="ingrese un mensaje" name="username"/>
+        <br>
+        <label>Contraseña:</label>
+        <br>
+        <input placeholder="pepe123" name="password"/>
         <button type="submit">Enviar</button>
     </form>
 
     <script>
         const direccion = 'http://localhost:8080/'
         const formularioHTML = document.getElementById('formulario')
-        formularioHTML.addEventListener('submit', (e)=>{
+        formularioHTML.addEventListener('submit', async (e)=>{
             e.preventDefault()
 
-            const data = {mensaje: formularioHTML.mensaje.value}
-            fetch(direccion, {
+            const data = {username: formularioHTML.username.value, password: formularioHTML.password.value}
+            const respuesta = await fetch(direccion, {
                 method: 'POST', 
                 body: new URLSearchParams(data).toString(), 
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            })
+            }).then(res => res.json())
+            console.log(respuesta)
         })
 
         const responseHTML = document.getElementById('response')

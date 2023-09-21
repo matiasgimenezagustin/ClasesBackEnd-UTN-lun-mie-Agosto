@@ -15,9 +15,10 @@ app.get('/', (req, response) =>{
     response.json({mensaje: 'pepe'})
 })
 app.post('/', (req, res)=>{
-    console.log(req.body.mensaje)
-    console.log('me enviaron algo')
-    res.json({mensaje: 'gracias por el dato'})
+    const {username, password} = req.body
+    const user = {username, password}
+    console.log(user)
+    res.json({mensaje: 'gracias por el loguear'})
 })
 
 
