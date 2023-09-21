@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>hola</h1>
@@ -16,6 +21,7 @@
         <label>Contraseña:</label>
         <br>
         <input placeholder="pepe123" name="password"/>
+        <span class="error"></span>
         <button type="submit">Enviar</button>
     </form>
 
@@ -34,6 +40,13 @@
                 }
             }).then(res => res.json())
             console.log(respuesta)
+            if(respuesta.ok){
+                window.location.href = './home.html'
+            }else{
+                const errorHTML = document.querySelector('.error')
+                errorHTML.innerText = respuesta.mensaje
+           
+            }
         })
 
         const responseHTML = document.getElementById('response')
