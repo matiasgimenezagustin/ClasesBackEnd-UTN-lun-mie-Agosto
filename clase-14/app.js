@@ -4,11 +4,16 @@ const cors = require('cors')
 const PORT = 8080
 const app = express()
 
+
+/* Middleweres */
+app.use(cors())
+app.use(express.json()) /* Habilita pasar JSON */
+
+
 const routerProducts = require('./router/routerProducts')
 app.use('/api/products', routerProducts)
 
-app.use(cors())
-app.use(express.json()) /* Habilita pasar JSON */
+
 
 app.get('/', (req, res) =>{
     res.send('<h1 style="color: red;">Try it now</h1>')

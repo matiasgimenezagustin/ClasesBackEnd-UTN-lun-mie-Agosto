@@ -37,7 +37,12 @@
 
         const getAllProducts = () =>{
             fetch('http://localhost:8080/api/products', {
-                method: 'GET'
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                'Accept': 'application/json',
+                
+            }
             })
             .then((res) => res.json())
             .then(data => {
