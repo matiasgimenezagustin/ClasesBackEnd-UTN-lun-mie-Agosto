@@ -7,6 +7,7 @@
 </head>
 <body>
     <!-- Aca iran los productos (ESTO ES EL FRONTEND) -->
+
     <div id="products">
 
     </div>
@@ -16,7 +17,12 @@
         const DIRECCION_API = 'http://localhost:8080'
         const contenedorProductsHTML = document.getElementById('products')
 
-           
+        const deleteProductById = async (productId) => {
+            const response = await fetch('http://localhost:8080/api/products/' + productId , {method: 'DELETE'}).then(res => res.json())
+            if(response.ok){
+                renderProducts(response.products)
+            }
+        }
         const renderProducts = (products) =>{
             let resultHTML = ''
             products.forEach(product =>{
@@ -26,12 +32,19 @@
                         <h3>${product.price}</h3>
                         <span>${product.stock}</span>
                         <p>${product.description}</p>
-                        <button>Eliminar</button>
+                        <button class='btn-eliminar' id='btn-eliminar-${product.id}'>Eliminar</button>
                         <hr>
                     </div>
                 `
             })
             contenedorProductsHTML.innerHTML = resultHTML
+            const botonesEliminar = document.querySelectorAll('.btn-eliminar')
+            for(const boton of botonesEliminar){
+                boton.addEventListener('click', ()=>{
+                    const productId = boton.id.split('-').pop()
+                    deleteProductById(productId)
+                })
+            }
         }
 
 
