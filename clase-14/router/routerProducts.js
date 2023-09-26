@@ -1,10 +1,11 @@
 const express = require('express')
+const { getAllProducts } = require('../database/productsManager')
 
 const router = express.Router() 
 
 
 router.get('/', (req, res) =>{
-    res.send('<h1>Hola</h1>')
+    res.json({ok: true, products: getAllProducts()})
 })
 
-module.exports = {router}
+module.exports = router

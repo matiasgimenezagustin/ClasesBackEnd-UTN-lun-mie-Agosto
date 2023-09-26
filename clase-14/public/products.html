@@ -7,5 +7,49 @@
 </head>
 <body>
     <!-- Aca iran los productos (ESTO ES EL FRONTEND) -->
+    <div id="products">
+
+    </div>
+    
+    <script>
+        const products = []
+        const DIRECCION_API = 'http://localhost:8080'
+        const contenedorProductsHTML = document.getElementById('products')
+
+           
+        const renderProducts = (products) =>{
+            let resultHTML = ''
+            products.forEach(product =>{
+                resultHTML += `
+                    <div>
+                        <h2>${product.name}</h2>
+                        <h3>${product.price}</h3>
+                        <span>${product.stock}</span>
+                        <p>${product.description}</p>
+                        <button>Eliminar</button>
+                        <hr>
+                    </div>
+                `
+            })
+            contenedorProductsHTML.innerHTML = resultHTML
+        }
+
+
+        const getAllProducts = () =>{
+            fetch('http://localhost:8080/api/products', {
+                method: 'GET'
+            })
+            .then((res) => res.json())
+            .then(data => {
+                    if(data.ok){
+                        data.products.forEach(product => products.push(product))
+                        renderProducts(products)
+                    }
+                }
+            )
+        }
+        
+        getAllProducts()
+    </script>
 </body>
 </html>
