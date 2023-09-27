@@ -23,6 +23,23 @@ app.get("/hola", (req, res) => {
 app.get('/login', (req, res) =>{
     res.render('login')
 })
+
+const products = [
+    {
+        nombre: 'samsung tv 45"',
+        price: 450,
+        id: 1
+    },
+    {
+        nombre: 'samsung tv 32"',
+        price: 400,
+        id: 2
+    },
+]
+
+app.get('/products', (req, res) =>{
+    res.render('products', {products})
+})
 app.listen(PORT, () => {
     console.log(`El servidor se esta runeando en http://localhost:${PORT}/`);
 });
