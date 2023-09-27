@@ -16,7 +16,6 @@ router.delete('/:id', (req, res) =>{
 
 router.put('/:id/:stock', (req, res) =>{
     const {id, stock} = req.params
-
     updateStockById(id, stock)
     res.json({ok: true, message: 'Producto actualizado', products: getAllProducts()})
 })

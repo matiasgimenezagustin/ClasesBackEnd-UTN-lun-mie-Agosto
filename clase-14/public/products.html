@@ -18,7 +18,10 @@
         const contenedorProductsHTML = document.getElementById('products')
 
         const deleteProductById = async (productId) => {
-            const response = await fetch('http://localhost:8080/api/products/' + productId , {method: 'DELETE'}).then(res => res.json())
+            const response = await fetch(DIRECCION_API +'/api/products/' + productId , {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
             if(response.ok){
                 renderProducts(response.products)
             }
@@ -54,8 +57,7 @@
                 mode: 'cors',
                 headers: {
                 'Accept': 'application/json',
-                
-            }
+                }
             })
             .then((res) => res.json())
             .then(data => {
