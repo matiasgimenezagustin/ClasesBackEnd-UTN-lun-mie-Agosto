@@ -40,6 +40,10 @@ const products = [
 app.get('/products', (req, res) =>{
     res.render('products', {products})
 })
+
+app.get('/products/:id', (req, res) =>{
+    res.render('detail')
+})
 app.listen(PORT, () => {
     console.log(`El servidor se esta runeando en http://localhost:${PORT}/`);
 });
