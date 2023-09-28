@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const PORT = 8080
 const hbs = require('hbs')
+const { getAllProducts } = require('./managers/productManager')
+
 
 const app = express()
 
@@ -24,24 +26,14 @@ app.get('/login', (req, res) =>{
     res.render('login')
 })
 
-const products = [
-    {
-        nombre: 'samsung tv 45"',
-        price: 450,
-        id: 1
-    },
-    {
-        nombre: 'samsung tv 32"',
-        price: 400,
-        id: 2
-    },
-]
+
 
 app.get('/products', (req, res) =>{
-    res.render('products', {products})
+    res.render('products', {products: getAllProducts()})
 })
 
 app.get('/products/:id', (req, res) =>{
+    /* Obtener el id del req.params y buscar el producto. una vez encontrado, darselo al archivo handlebars */
     res.render('detail')
 })
 app.listen(PORT, () => {
