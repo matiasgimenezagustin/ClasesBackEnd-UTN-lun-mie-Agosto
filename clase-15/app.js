@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const PORT = 8080
 const hbs = require('hbs')
-const { getAllProducts } = require('./managers/productManager')
+const { getAllProducts, getProductById } = require('./managers/productManager')
 
 
 const app = express()
@@ -29,12 +29,13 @@ app.get('/login', (req, res) =>{
 
 
 app.get('/products', (req, res) =>{
-    res.render('products', {products: getAllProducts()})
+    res.render('products', {products: getAllProducts(), message: 'hola'})
 })
 
 app.get('/products/:id', (req, res) =>{
+    const {id} = req.params
     /* Obtener el id del req.params y buscar el producto. una vez encontrado, darselo al archivo handlebars */
-    res.render('detail')
+    res.render('detail', {product: getProductById(id)})
 })
 app.listen(PORT, () => {
     console.log(`El servidor se esta runeando en http://localhost:${PORT}/`);
