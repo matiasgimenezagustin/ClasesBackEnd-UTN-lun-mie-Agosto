@@ -15,11 +15,15 @@ app.use(express.urlencoded({extended: false}))
 //Configuarar el Motor de plantillas
 
 app.set('view engine', 'hbs')
-app.set('view', __dirname + '/views')
+app.set('views', __dirname + '/views')
 
 
 app.use('/formulario', formRouter)
 
+
+app.get('/',(req, res) =>{
+    res.render('home')
+})
 app.listen(PORT, ()=>{
     console.log('El servidor se esta escuchando en: http://localhost:' + PORT )
 })
