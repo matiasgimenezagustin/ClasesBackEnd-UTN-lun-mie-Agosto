@@ -10,7 +10,7 @@ const PORT = 900
 app.use(express.static(__dirname + '/public'))
 
 /* Middlewere para permitir que se puedan procesar los formularios en los cuerpos de las solcitudes */
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: true}))
 
 //Configuarar el Motor de plantillas
 
