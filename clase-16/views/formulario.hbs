@@ -24,6 +24,9 @@
                 <label for="mensaje">Ingrese su mensaje:</label>
                 <textarea placeholder="Hola, como estas?" id="mensaje" name="mensaje" rows="15" required minlength="20"></textarea>
             </div>
+            {{#if error}}
+                <span style="color: red;">{{error}}</span>
+            {{/if}}
             <button type="submit">Enviar</button>
         </form>
     </main>

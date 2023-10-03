@@ -6,9 +6,14 @@ formRouter.get('/', (req, res) =>{
     res.render('formulario')
 })
 formRouter.post('/', (req, res) =>{
-    console.log(req.body.nombre)
-    console.log('alguien envio un mensaje')
-    res.render('mensajeExitoso')
+    const {nombre, email, mensaje} =  req.body
+    if(!nombre || nombre === ' ' || !email || !mensaje){
+        res.render('formulario', {error: 'No puedes enviar campos vacios'})
+    }
+    else{
+        res.render('mensajeExitoso')
+    }
+    
 })
 
 module.exports = formRouter
