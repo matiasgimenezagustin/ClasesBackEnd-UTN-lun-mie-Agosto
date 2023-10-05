@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <a href="/">Volver</a>
+    <main>
+        
+        <h1>Contactame</h1>
+        <form method="post" action="/formulario">
+            <div>
+                <label for="nombre">Ingrese su nombre:</label>
+                <input placeholder="cosme fulanito" id="nombre" name="nombre" required/>
+            </div>
+            <div>
+                <label for="email">Ingrese su email:</label>
+                <input placeholder="cosme.fulanito@gmail.com" id="email" name="email" type="email" required/>
+            </div>
+            <div>
+                <label for="mensaje">Ingrese su mensaje:</label>
+                <textarea placeholder="Hola, como estas?" id="mensaje" name="mensaje" rows="15" required minlength="20"></textarea>
+            </div>
+            {{#if error}}
+                <span style="color: red;">{{error}}</span>
+            {{/if}}
+            <button type="submit">Enviar</button>
+        </form>
+    </main>
+    
+    
+
+</body>
+</html>

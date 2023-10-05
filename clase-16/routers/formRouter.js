@@ -40,10 +40,6 @@ formRouter.post('/', async (req, res) =>{
     catch(error){
         res.render('formulario', {error: 'Error al enviar el mensaje'})
     }
-    
-    
-
-
 })
 
 module.exports = formRouter
