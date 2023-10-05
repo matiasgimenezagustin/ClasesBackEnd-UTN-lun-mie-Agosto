@@ -13,18 +13,18 @@ const Producto = require('./models/Producto')
 
 const obtenerProductos = async () =>{
         
-    mongoose.connect(URL_CONNECTION, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(()=>{
+    try {
+        await mongoose.connect(URL_CONNECTION, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
         console.log('Nos conectamos con mongoDB correctamente')
-        Producto.find({})
-    })
-    .catch((error) =>{
-        console.log('No se pudo hacer la conexion con MongoDB')
+        const productos =  await Producto.find({})
+        console.log(productos)
+    }
+    catch(error){
         console.error(error)
-    })
+    }
 }
 
 
@@ -45,12 +45,54 @@ const crearProducto = async (titulo, precio, descripcion, stock) =>{
     }
 }
 
-crearProducto('Empanada atun y sardina', 600, 'Empanadas muy polemicas', 5)
+const eliminarProductoPorId = async (productoId) =>{
+    try{
+        await mongoose.connect(URL_CONNECTION, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+        console.log('Nos conectamos con mongoDB correctamente')
+        const productoEliminado = await Producto.findByIdAndRemove(productoId)
+        if(productoEliminado){
+            console.log('Producto eliminado con exito')
+        }
+        else{
+            console.log('Producto no encontrado')
+        }
+    }
+    catch(error){
+        console.error("No se pudo conectar correctamente MongoDB")
+    }
+}
 
+const actualizarStockById = async (stock, id) =>{
+    try{
+        await mongoose.connect(URL_CONNECTION, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+        const productoActualizado =  await Producto.findByIdAndUpdate(id, {stock: stock}, {new: true})
+        if(productoActualizado){
+            console.log('stock actualizado:')
+            console.log(productoActualizado)
+        }
+        else{
+            console.log('No se encontro producto por ese id')
+        }
+    }
+    catch(error){
+        console.error("No se pudo conectar correctamente MongoDB")
+    }
+}
+
+/* crearProducto('Empanada atun y sardina', 600, 'Empanadas muy polemicas', 5) */
+/* actualizarStockById(90, '651e0969f649aa696c670455') */
+/* obtenerProductos()
+ */
 /* Crear una funcion que reciba los parametros necesarios para que se pueda crear un producto, y luego crear y guardar el producto en MongoDB usando el metodo save() */
 
-
-
+/* eliminarProductoPorId('651e02f8a661922ba0259827') recibe el id del producto a eliminar
+ */
 
 
 
