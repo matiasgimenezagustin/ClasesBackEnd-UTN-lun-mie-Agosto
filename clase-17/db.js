@@ -51,3 +51,5 @@ const crearProducto = async (titulo, precio, descripcion, stock) =>{
 }
 
 crearProducto('Empanada atun y sardina', 600, 'Empanadas muy polemicas', 5)
+
+/* Crear una funcion que reciba los parametros necesarios para que se pueda crear un producto, y luego crear y guardar el producto en MongoDB usando el metodo save() */
