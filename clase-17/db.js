@@ -29,6 +29,35 @@ const obtenerProductos = async () =>{
 
 
 const crearProducto = async (titulo, precio, descripcion, stock) =>{
+    try{
+        await mongoose.connect(URL_CONNECTION, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+        console.log('Nos conectamos con mongoDB correctamente')
+        const nuevoProducto =  new Producto({titulo, precio, descripcion, stock})
+        const productoNuevo = await nuevoProducto.save()
+        console.log('Se guardo el producto:')
+        console.log(productoNuevo)
+    }
+    catch(error){
+        console.error("No se pudo conectar correctamente MongoDB")
+    }
+}
+
+crearProducto('Empanada atun y sardina', 600, 'Empanadas muy polemicas', 5)
+
+/* Crear una funcion que reciba los parametros necesarios para que se pueda crear un producto, y luego crear y guardar el producto en MongoDB usando el metodo save() */
+
+
+
+
+
+
+
+/* 
+
+const crearProducto = async (titulo, precio, descripcion, stock) =>{
     mongoose.connect(URL_CONNECTION, {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -50,6 +79,5 @@ const crearProducto = async (titulo, precio, descripcion, stock) =>{
     })
 }
 
-crearProducto('Empanada atun y sardina', 600, 'Empanadas muy polemicas', 5)
 
-/* Crear una funcion que reciba los parametros necesarios para que se pueda crear un producto, y luego crear y guardar el producto en MongoDB usando el metodo save() */
+*/
