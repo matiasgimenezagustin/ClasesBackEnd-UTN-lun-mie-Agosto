@@ -54,6 +54,23 @@ const User = mongoose.model('User', {
 //Endpoints:
 
 
+app.get('/', (req, res) =>{
+    if(req.session.user){
+        res.render('home', {user: req.session.user})
+    }else{
+        res.render('login')
+    }
+})
+
+app.get('/login', (req, res) =>{
+    res.render('login')
+})
+
+app.get('/register', (req, res) =>{
+    res.render('register')
+})
+
+
 app.listen(PORT, () =>{
     console.log(`Su servidor se esta ejecutando en http://localhost:${PORT}/`)
 })
