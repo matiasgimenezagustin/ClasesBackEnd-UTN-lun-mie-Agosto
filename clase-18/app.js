@@ -11,6 +11,7 @@ const app = express()
 
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({extended: true}))
+
 const session_params ={
     secret: 'keySecret',
     resave: false,
@@ -66,10 +67,17 @@ app.get('/login', (req, res) =>{
     res.render('login')
 })
 
+app.post('/login', (req, res)=>{
+    const {username, password} = req.body
+})
+
 app.get('/register', (req, res) =>{
     res.render('register')
 })
 
+app.post('/register', (req, res) =>{
+    const {username, password} = req.body
+})
 
 app.listen(PORT, () =>{
     console.log(`Su servidor se esta ejecutando en http://localhost:${PORT}/`)
