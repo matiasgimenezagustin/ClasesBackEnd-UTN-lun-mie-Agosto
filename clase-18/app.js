@@ -2,6 +2,7 @@ const express =  require('express')
 const session = require('express-session')
 const mongoose =  require('mongoose')
 const hbs = require("hbs")
+const e = require('cors')
 
 
 const PORT = 7070
@@ -67,16 +68,36 @@ app.get('/login', (req, res) =>{
     res.render('login')
 })
 
-app.post('/login', (req, res)=>{
+app.post('/login', async (req, res)=>{
     const {username, password} = req.body
+    const user =  await User.findOne({username}) //busca en la db al usuario con este username
+    if(user){
+        req.session.user = user
+        res.redirect('/')
+    }else{
+        res.render('login', {error:'Credenciales invalidas' })
+    }
 })
 
 app.get('/register', (req, res) =>{
     res.render('register')
 })
 
-app.post('/register', (req, res) =>{
+app.post('/register', async (req, res) =>{
     const {username, password} = req.body
+    const usuarioExistente =  await User.findOne({username})
+    if(usuarioExistente){
+        res.render('register', {error: 'El nombre de usuario ya esta siendo utilizado'})
+    }else{
+        const newUser = new User({username, password})
+        await newUser.save()
+        res.redirect('/login')
+    }
+})
+
+app.get('/logout', (req, res) =>{
+    req.session.destroy()
+    res.redirect('/')
 })
 
 app.listen(PORT, () =>{

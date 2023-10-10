@@ -20,6 +20,9 @@
             </label>
             <input type="password" id="password" name="password" placeholder="cosme123" required/> 
         </div>
+        {{#if error}}
+            <p style="color: red">{{error}}</p>
+        {{/if}}
         <input type="submit" value="Registrar" />
     </form>
     <span>Ya tienes cuenta? <a href="/login">Ingresa aqui</a></span>
