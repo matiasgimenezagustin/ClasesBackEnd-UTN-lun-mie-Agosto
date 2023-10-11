@@ -64,8 +64,28 @@ app.get('/', (req, res) =>{
     }
 })
 
+
+/* 
+
+Quiero una vista en /products/new:
+
+Va a tener un formulario donde podre cargar un producto
+este producto debe tener un nombre, stock, precio, descripcion
+al cargar el producto se guardara en la DB
+
+Solamente puede acceder el administrador, si no sos administrador te redireccionara a una pagina de error
+en /error
+
+*/
+
+
+
 app.get('/login', (req, res) =>{
     res.render('login')
+})
+
+app.get('/error', (req, res) => {
+    res.render('error')
 })
 
 app.post('/login', async (req, res)=>{
@@ -113,3 +133,4 @@ app.listen(PORT, () =>{
 })
 
 
+/* Como autoresetar con HBS */
