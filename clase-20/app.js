@@ -5,6 +5,10 @@ const mysql = require('mysql')
 
 const app = express()
 
+//MIDDLEWERES
+
+app.use(express.urlencoded({extended: false}))
+
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -39,6 +43,18 @@ app.get('/posts', (req, res) =>{
     })
     
 })
+
+const ID_USUARIO = 1
+
+app.get('posts/new', (req, res) => {
+    res.render('newPost')
+})
+
+app.post('/posts/new', (req, res) =>{
+    const {title, content} = req.body
+
+})
+
 
 app.listen(8080, () =>{
     console.log('El servidor se esta escuchando en http://localhost:8080/posts')
