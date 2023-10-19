@@ -8,7 +8,7 @@
 <body>
     
     <h1>Crear un nuevo post</h1>
-    <form action="/post/new" method="POST">
+    <form action="/posts/new" method="POST">
         <div>
             <label for="title" >Titulo:</label>
             <input 
@@ -33,5 +33,10 @@
         </div>
         <button type="submit" >Crear post</button>
     </form>
+    {{#if error}}
+        <span style="color: red;">
+            {{error}}
+        </span>
+    {{/if}}
 </body>
 </html>

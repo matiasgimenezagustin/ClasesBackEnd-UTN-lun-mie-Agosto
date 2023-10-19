@@ -53,7 +53,20 @@ app.get('/posts/new', (req, res) => {
 
 app.post('/posts/new', (req, res) =>{
     const {title, content} = req.body
+    if(!title || !content){
+        return res.render('newPost', {error: 'No has completado los campos'})
+    }
 
+    const query =  'INSERT INTO posts (fk_id_user, title, content) VALUES (?, ?, ?)'
+
+    db.query(query, [ID_USUARIO, title, content], (err, result) =>{
+        if(err) {
+            console.error(err)
+            return res.render('newPost', {error: 'Ha habido un error al intententar crear el post, intenta mas tarde'})
+        }
+        res.redirect('/posts')
+    })
+    
 })
 
 
