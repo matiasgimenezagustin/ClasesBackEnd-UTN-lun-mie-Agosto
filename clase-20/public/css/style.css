@@ -1,0 +1,16 @@
+
+
+.postContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.postContainer div{
+    width: 300px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+
+}

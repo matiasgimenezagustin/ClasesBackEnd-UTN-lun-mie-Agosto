@@ -30,6 +30,7 @@ db.connect((err) =>{
 
 app.set('view engine', 'hbs')
 app.set('views' + __dirname + '/views')
+app.use(express.static(__dirname + '/public'))
 
 app.get('/posts', (req, res) =>{
     const query = 'SELECT * FROM posts'
@@ -46,7 +47,7 @@ app.get('/posts', (req, res) =>{
 
 const ID_USUARIO = 1
 
-app.get('posts/new', (req, res) => {
+app.get('/posts/new', (req, res) => {
     res.render('newPost')
 })
 
