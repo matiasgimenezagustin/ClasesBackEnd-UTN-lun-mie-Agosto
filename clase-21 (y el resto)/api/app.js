@@ -37,6 +37,11 @@ app.get('/api/products', (req, res) =>{
     })
 })
 
+app.get('/api/product/:pid', (req, res) =>{
+    console.log(req.params)
+    res.json({ok: true})
+})
+
 app.listen(PORT, () =>{
     console.log(`El servidor se esta escuchando en http://localhost:${PORT}`)
 })

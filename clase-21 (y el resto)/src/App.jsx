@@ -1,8 +1,8 @@
 import React from 'react'
 
 import './App.css'
-import { Home } from './screens'
 import { BrowserRouter } from 'react-router-dom'
+import RouterPage from './RouterPage'
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
     <>
     
     <BrowserRouter>
-    <Home/>
+      <RouterPage/>
     </BrowserRouter>
       
     </>

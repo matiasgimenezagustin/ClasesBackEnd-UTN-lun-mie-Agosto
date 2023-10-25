@@ -26,7 +26,7 @@ const Home = () => {
           : products.map(product =>(
             <div>
               <h3>{product.nombre}</h3>
-              <Link>Ver detalle</Link>
+              <Link to={'/product/detail/' + product.id }>Ver detalle</Link>
             </div>
           )) 
         }
