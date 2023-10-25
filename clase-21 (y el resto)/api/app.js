@@ -38,8 +38,23 @@ app.get('/api/products', (req, res) =>{
 })
 
 app.get('/api/product/:pid', (req, res) =>{
-    console.log(req.params)
-    res.json({ok: true})
+    const {pid } = req.params
+    const query =  'SELECT * FROM products WHERE id = ?'
+    db.query(query, [pid], (err, result) =>{
+        if(err){
+            console.error(err)
+            res.status(500).json({ok:false, error: 'Problemas al intententar buscar el producto en la DB'})
+        }
+        else{
+            if(result){
+                res.json({product: result[0], ok: true})
+            }
+            else{
+                res.status(404).json({ok:false, error: 'producto no encontrado'})
+            }
+        }
+    })
+
 })
 
 app.listen(PORT, () =>{

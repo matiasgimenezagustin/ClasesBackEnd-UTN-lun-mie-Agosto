@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 const Detail = () => {
     const {pid} = useParams()
     fetch('http://localhost:4000/api/product/' + pid)
+    .then(res => res.json() )
+    .then(result =>console.log(result))
   return (
     <div>Detail</div>
   )
