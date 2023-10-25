@@ -24,7 +24,7 @@ const Home = () => {
           loading 
           ? <h2>Cargando..</h2>
           : products.map(product =>(
-            <div>
+            <div key={product.id}>
               <h3>{product.nombre}</h3>
               <Link to={'/product/detail/' + product.id }>Ver detalle</Link>
             </div>
