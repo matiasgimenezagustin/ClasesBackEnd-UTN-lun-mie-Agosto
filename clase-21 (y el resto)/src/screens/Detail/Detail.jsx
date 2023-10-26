@@ -6,6 +6,8 @@ const Detail = () => {
     const navigate = useNavigate()
     const {pid} = useParams()
     const [productDetail, setProductDetail] = useState(null)
+    const [isEditModeActive, setIsEditModeActive] = useState(false)
+    const [stockValue, setStockValue] = useState()
     useEffect(
         () =>{
             fetch('http://localhost:4000/api/product/' + pid)
@@ -29,7 +31,24 @@ const Detail = () => {
             }
         })
     }
+    const handleActiveEditMode =() =>{
+        setIsEditModeActive(true)
+        setStockValue(productDetail.stock)
+    }
     console.log(productDetail)
+
+    const handleConfirmNewStock = () =>{
+        fetch('http://localhost:4000/api/product/' + pid + '?stock=' + stockValue, {method: 'PUT'})
+        .then((res) => res.json())
+        .then(result => {
+            if(result.ok){
+                setProductDetail(result.product)
+            }else{
+                alert(result.error)
+            }
+        })
+        setIsEditModeActive(false)
+    }
   return (
     <div>
         <Link to='/'>Volver</Link>
@@ -38,10 +57,16 @@ const Detail = () => {
             ? <div>
                 <h2>{productDetail.nombre}</h2>
                 <h3>Precio: ${productDetail.precio}</h3>
-                <span>Stock: {productDetail.stock}</span>
+                <span>Stock: { 
+                isEditModeActive 
+                ? <input value={stockValue} onChange={(e) =>{setStockValue(e.target.value)}} type='number'/>
+                :productDetail.stock
+                }</span>
                 <p>{productDetail.descripcion}</p>
                 <button onClick={handleDeleteProduct}>Eliminar</button>
-                <button>Editar</button>
+                {isEditModeActive 
+                ? <button onClick={handleConfirmNewStock}>Confirmar</button>
+                : <button onClick={handleActiveEditMode}>Modificar stock</button>}
             </div>
             : <h2>Cargando...</h2>
         }
