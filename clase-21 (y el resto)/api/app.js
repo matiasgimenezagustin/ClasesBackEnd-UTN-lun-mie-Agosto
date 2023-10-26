@@ -57,6 +57,23 @@ app.get('/api/product/:pid', (req, res) =>{
 
 })
 
+
+app.delete('/api/product/:pid', (req, res) =>{
+
+    const {pid} = req.params
+    const query = 'DELETE FROM products WHERE id = ?'
+    db.query(query, [pid], (err, result) =>{
+        if(err){
+            console.error(err)
+            res.status(500).json({ok: false, error: 'no se pudo eliminar el producto'})
+        }
+        else{
+            res.status(200).json({ok:true})
+        }
+    })
+
+})
+
 app.listen(PORT, () =>{
     console.log(`El servidor se esta escuchando en http://localhost:${PORT}`)
 })
