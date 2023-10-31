@@ -11,9 +11,24 @@ const createProduct  = async (product) =>{
     }
 }
 
-const getProducts = () => {
-
+const getProducts = async () => {
+    return await Product.find({})
 }
 
+const deleteProduct = async (pid) =>{
+    try{
+        const deletedProduct = await Product.findByIdAndDelete(pid)
+        if(deleteProduct){
+            return {ok: true, deletedProduct}
+        }
+        else{
+            return {error: 'Producto no encontrado'}
+        }
+    }
+    catch(err){
+        return {error: 'id no valido'}
+    }
+   
+}
 
-module.exports = {createProduct, getProducts}
+module.exports = {createProduct, getProducts, deleteProduct}
