@@ -11,6 +11,11 @@ const createProduct  = async (product) =>{
     }
 }
 
+
+const getProductById = async (pid) =>{
+    return await Product.findById(pid)
+}
+
 const getProducts = async () => {
     return await Product.find({})
 }
@@ -31,4 +36,7 @@ const deleteProduct = async (pid) =>{
    
 }
 
-module.exports = {createProduct, getProducts, deleteProduct}
+
+/* Desarrolla la ruta para crear productos */
+
+module.exports = {createProduct, getProducts, deleteProduct, getProductById}
