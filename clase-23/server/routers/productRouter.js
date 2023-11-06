@@ -7,8 +7,8 @@ productRouter.get('/', async (req, res) => {
 })
 
 productRouter.post('/', async (req, res) =>{
-    const {nombre, precio, stock, descripcion} = req.body
-    await createProduct({nombre, precio, stock, descripcion})
+    const {nombre, precio, stock, descripcion, thumbnail} = req.body
+    await createProduct({nombre, precio, stock, descripcion, thumbnail})
     res.json({ok:true, products: await getProducts()})
 })
 
