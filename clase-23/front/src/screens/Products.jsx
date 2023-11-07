@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Products = () => {
     
@@ -12,12 +13,12 @@ const Products = () => {
   return (
     <div>
         {products.length != 0  && products.map((product) =>(
-            <div key={product._id}>
+            <Link to={'/product/' + product._id} key={product._id}>
                 {product.thumbnail && <img src={'http://localhost:3040/images/' + product.thumbnail}  />}
                 
                 <h2>{product.nombre}</h2>
 
-            </div>
+            </Link>
         ))}
     </div>
   )
